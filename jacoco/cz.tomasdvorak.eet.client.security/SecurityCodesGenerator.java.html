@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SecurityCodesGenerator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">eet-client</a> &gt; <a href="index.source.html" class="el_package">cz.tomasdvorak.eet.client.security</a> &gt; <span class="el_source">SecurityCodesGenerator.java</span></div><h1>SecurityCodesGenerator.java</h1><pre class="source lang-java linenums">package cz.tomasdvorak.eet.client.security;
+
+import cz.etrzby.xml.TrzbaDataType;
+import cz.tomasdvorak.eet.client.exceptions.DataSigningException;
+import cz.tomasdvorak.eet.client.security.ClientKey;
+import cz.tomasdvorak.eet.client.utils.DateUtils;
+import cz.tomasdvorak.eet.client.utils.NumberUtils;
+import cz.tomasdvorak.eet.client.utils.StringJoiner;
+import cz.tomasdvorak.eet.client.utils.StringUtils;
+
+import javax.xml.bind.DatatypeConverter;
+import java.math.BigInteger;
+import java.security.NoSuchAlgorithmException;
+
+/**
+ * Utility for the BKP and PKP signing and hashing
+ * PKP - Podpisový kód poplatníka/Taxpayer's Signature Code
+ * BKP - Bezpečnostní kód poplatníka/Taxpayer's Security Code
+ */
+public class SecurityCodesGenerator {
+
+    private final ClientKey clientKey;
+
+<span class="fc" id="L24">    public SecurityCodesGenerator(final ClientKey clientKey) {</span>
+<span class="fc" id="L25">        this.clientKey = clientKey;</span>
+<span class="fc" id="L26">    }</span>
+
+    public String getBKP(final TrzbaDataType data) throws DataSigningException {
+<span class="fc" id="L29">            final byte[] pkp = getPKP(data);</span>
+<span class="fc" id="L30">            final byte[] bytes = sha1(pkp);</span>
+<span class="fc" id="L31">            final String base16 = StringUtils.leftPad(toBase16(bytes), 40, '0');</span>
+<span class="fc" id="L32">            final String[] blocks = StringUtils.splitBlocks(base16, 8);</span>
+<span class="fc" id="L33">            final StringJoiner stringJoiner = new StringJoiner(&quot;-&quot;);</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">            for(final String block : blocks) {</span>
+<span class="fc" id="L35">                stringJoiner.add(block);</span>
+            }
+<span class="fc" id="L37">            return stringJoiner.toString().toUpperCase();</span>
+    }
+
+    private String toBase16(final byte[] bytes) {
+<span class="fc" id="L41">        return new BigInteger(1, bytes).toString(16);</span>
+    }
+
+    public byte[] getPKP(final TrzbaDataType data) throws DataSigningException {
+<span class="fc" id="L45">        return this.clientKey.sign(serializeData(data));</span>
+    }
+
+    private static String serializeData(final TrzbaDataType data) {
+<span class="fc" id="L49">        final StringJoiner joiner = new StringJoiner(&quot;|&quot;);</span>
+<span class="fc" id="L50">        joiner.add(data.getDicPopl());</span>
+<span class="fc" id="L51">        joiner.add(&quot;&quot; + data.getIdProvoz());</span>
+<span class="fc" id="L52">        joiner.add(data.getIdPokl());</span>
+<span class="fc" id="L53">        joiner.add(data.getPoradCis());</span>
+<span class="fc" id="L54">        joiner.add(DateUtils.format(data.getDatTrzby()));</span>
+<span class="fc" id="L55">        joiner.add(NumberUtils.format(data.getCelkTrzba()));</span>
+<span class="fc" id="L56">        return joiner.toString();</span>
+    }
+
+    private static byte[] sha1(final byte[] text) throws DataSigningException {
+        try {
+<span class="fc" id="L61">            final java.security.MessageDigest d = java.security.MessageDigest.getInstance(&quot;SHA-1&quot;);</span>
+<span class="fc" id="L62">            d.reset();</span>
+<span class="fc" id="L63">            d.update(text);</span>
+<span class="fc" id="L64">            return d.digest();</span>
+<span class="nc" id="L65">        } catch (final NoSuchAlgorithmException e) {</span>
+<span class="nc" id="L66">            throw new DataSigningException(e);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

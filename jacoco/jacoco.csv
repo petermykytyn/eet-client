@@ -1,0 +1,33 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+eet-client,cz.tomasdvorak.eet.client,EETClientImpl.new AsyncHandler() {...},39,0,0,0,8,0,2,0,2,0
+eet-client,cz.tomasdvorak.eet.client,EETServiceFactory,31,0,0,0,3,0,3,0,3,0
+eet-client,cz.tomasdvorak.eet.client,EETClientImpl,166,0,6,0,38,0,10,0,7,0
+eet-client,cz.tomasdvorak.eet.client.security.crl,InMemoryCRLStore.new Callable() {...},15,0,0,0,2,0,2,0,2,0
+eet-client,cz.tomasdvorak.eet.client.security.crl,InMemoryCRLStore,266,0,14,0,56,0,14,0,7,0
+eet-client,cz.tomasdvorak.eet.client.security.crl,CRLUtils,10,117,5,9,3,30,6,8,1,6
+eet-client,cz.tomasdvorak.eet.client.exceptions,CommunicationException,17,0,0,0,5,0,3,0,3,0
+eet-client,cz.tomasdvorak.eet.client.exceptions,InvalidKeystoreException,8,0,0,0,4,0,2,0,2,0
+eet-client,cz.tomasdvorak.eet.client.exceptions,DataSigningException,4,0,0,0,2,0,1,0,1,0
+eet-client,cz.tomasdvorak.eet.client.exceptions,RevocationListException,9,0,0,0,4,0,2,0,2,0
+eet-client,cz.tomasdvorak.eet.client.utils,IOUtils,4,6,0,2,2,4,1,2,1,1
+eet-client,cz.tomasdvorak.eet.client.utils,NumberUtils,15,13,0,0,6,3,1,3,1,3
+eet-client,cz.tomasdvorak.eet.client.utils,StringJoiner,0,75,0,4,0,17,0,6,0,4
+eet-client,cz.tomasdvorak.eet.client.utils,StringUtils,3,34,0,2,1,6,1,4,1,3
+eet-client,cz.tomasdvorak.eet.client.utils,DateUtils,15,13,0,0,6,3,1,3,1,3
+eet-client,cz.tomasdvorak.eet.client.logging,WebserviceLogging,15,0,0,0,4,0,2,0,2,0
+eet-client,cz.tomasdvorak.eet.client.logging,WebserviceLogging.new LoggingInInterceptor() {...},7,0,0,0,3,0,2,0,2,0
+eet-client,cz.tomasdvorak.eet.client.logging,WebserviceLogging.new LoggingOutInterceptor() {...},7,0,0,0,3,0,2,0,2,0
+eet-client,cz.tomasdvorak.eet.client.binding,BigDecimalAdapter,0,35,0,6,0,9,0,6,0,3
+eet-client,cz.tomasdvorak.eet.client.binding,XmlDateAdapter,0,44,0,0,0,5,0,3,0,3
+eet-client,cz.tomasdvorak.eet.client.security,ServerKey,39,58,0,0,11,15,1,4,1,4
+eet-client,cz.tomasdvorak.eet.client.security,SecureEETCommunication.new WSS4JInInterceptor() {...},41,0,4,0,7,0,4,0,2,0
+eet-client,cz.tomasdvorak.eet.client.security,ClientKey,98,133,1,1,30,26,4,7,3,7
+eet-client,cz.tomasdvorak.eet.client.security,MerlinWithCRLDistributionPointsExtension,31,0,2,0,10,0,4,0,3,0
+eet-client,cz.tomasdvorak.eet.client.security,SecureEETCommunication,255,0,6,0,64,0,16,0,13,0
+eet-client,cz.tomasdvorak.eet.client.security,SecurityCodesGenerator,6,118,0,2,2,25,0,7,0,6
+eet-client,cz.tomasdvorak.eet.client.security,ClientPasswordCallback,38,9,6,0,7,4,4,1,1,1
+eet-client,cz.tomasdvorak.eet.client.config,EndpointType,35,0,0,0,6,0,5,0,5,0
+eet-client,cz.tomasdvorak.eet.client.config,CommunicationMode,46,0,0,0,7,0,5,0,5,0
+eet-client,cz.tomasdvorak.eet.client.config,SubmissionType,46,0,0,0,7,0,5,0,5,0
+eet-client,cz.tomasdvorak.eet.client.dto,WebserviceConfiguration,15,0,0,0,5,0,3,0,3,0
+eet-client,cz.tomasdvorak.eet.client.dto,SubmitResult,46,0,2,0,11,0,6,0,5,0
